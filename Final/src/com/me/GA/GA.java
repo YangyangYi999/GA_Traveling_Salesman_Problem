@@ -1,13 +1,13 @@
 package com.me.GA;
 
-import java.util.Calendar;
+
+import java.io.IOException;
 import java.util.Random;
 
 
 
 public class GA {  
   private Population population = new Population();
-  private Random random;
  
   
   private void generatePopulation(int cityNumber,int pathNumber) {
@@ -15,8 +15,14 @@ public class GA {
 		  population.addIndividual(generateIndividual(cityNumber));
 	  }
 	  for(Individual x:population.getPopulation()) {
+		  transRoute(x);
 		  for(String s: x.getBinaryCity()) {
-		  System.out.println(s);}
+		  System.out.print(s+",");}
+		  System.out.println();
+		  for(int m: x.getDecimalCity()) {
+			  System.out.print(m+",");
+		  }
+		  System.out.println();
 		  System.out.println("---------------");
 	  }
   }
@@ -71,7 +77,7 @@ public class GA {
   
   private Boolean transTo(int cityNumber,String gene) {
 	   int digit =Integer.parseInt(gene,2);
-	   if(digit<=cityNumber) {
+	   if(digit<cityNumber) {
 		   return true;
 	   }
 	   else {
@@ -79,10 +85,33 @@ public class GA {
 	   }
   }
   
-  public static void main(String[] args) {
+  private void transRoute(Individual in ) {
+	  
+	  int []deximalCity = new int [in.getBinaryCity().length];
+	  String[]binaryCity = in.getBinaryCity();
+	  for(int i=0;i<in.getBinaryCity().length;i++) {
+		  deximalCity[i] = Integer.parseInt(binaryCity[i],2);
+		 // System.out.println("deci+ "+deximalCity[i]);
+	  }
+	  in.setDecimalCity(deximalCity);
+  }
+  
+  
+  public static void main(String[] args) throws IOException {
       GA ga = new GA();
 //      ga.generateIndividual(20);
-      ga.generatePopulation(20,10);
+ //     ga.generatePopulation(20,10);
+      Coordinates co = new Coordinates();
+      int [][] xy;
+      xy=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
+      for(int i=0;i<10;i++) {
+    	  for(int j=0;j<10;j++) {
+    		  System.out.print(" "+xy[i][j]);
+    		  
+    	  }
+    	  System.out.println();
+      }
+      
       
   }
 } 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Population {
 	private ArrayList <Individual> population = new ArrayList<Individual>();
-
+    
 	public ArrayList<Individual> getPopulation() {
 		return population;
 	}
