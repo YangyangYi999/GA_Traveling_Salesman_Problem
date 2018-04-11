@@ -13,5 +13,9 @@ public class Population {
 		this.population = population;
 	}
 	
+	public void addIndividual(Individual in) {
+		population.add(in);
+	}
+	
 	
 }

@@ -1,14 +1,16 @@
 package com.me.GA;
 
 public class Individual {
-	private boolean binaryCity[];
+	private String binaryCity[];
 	private int decimalCity[];
 
-	public boolean[] getBinaryCity() {
+
+
+	public String[] getBinaryCity() {
 		return binaryCity;
 	}
 
-	public void setBinaryCity(boolean[] binaryCity) {
+	public void setBinaryCity(String[] binaryCity) {
 		this.binaryCity = binaryCity;
 	}
 
