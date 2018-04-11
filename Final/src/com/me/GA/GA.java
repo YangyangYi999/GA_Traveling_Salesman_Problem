@@ -1,13 +1,12 @@
 package com.me.GA;
 
-import java.util.Calendar;
+
 import java.util.Random;
 
 
 
 public class GA {  
   private Population population = new Population();
-  private Random random;
  
   
   private void generatePopulation(int cityNumber,int pathNumber) {
@@ -15,6 +14,7 @@ public class GA {
 		  population.addIndividual(generateIndividual(cityNumber));
 	  }
 	  for(Individual x:population.getPopulation()) {
+		  transRoute(x);
 		  for(String s: x.getBinaryCity()) {
 		  System.out.println(s);}
 		  System.out.println("---------------");
@@ -71,13 +71,23 @@ public class GA {
   
   private Boolean transTo(int cityNumber,String gene) {
 	   int digit =Integer.parseInt(gene,2);
-	   if(digit<=cityNumber) {
+	   if(digit<cityNumber) {
 		   return true;
 	   }
 	   else {
 		   return false;
 	   }
   }
+  
+  private void transRoute(Individual in ) {
+	  int []deximalCity = new int [in.getBinaryCity().length];
+	  String[]binaryCity = in.getBinaryCity();
+	  for(int i=0;i<in.getBinaryCity().length;i++) {
+		  deximalCity[i] = Integer.parseInt(binaryCity[i],2);
+		  System.out.println("deci+ "+deximalCity[i]);
+	  }
+  }
+  
   
   public static void main(String[] args) {
       GA ga = new GA();
