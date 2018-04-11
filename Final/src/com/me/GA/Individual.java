@@ -4,7 +4,7 @@ public class Individual {
 	private String binaryCity[];
 	private int decimalCity[];
 
-
+    
 
 	public String[] getBinaryCity() {
 		return binaryCity;
