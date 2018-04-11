@@ -1,7 +1,10 @@
 package com.me.GA;
 
 
+<<<<<<< HEAD
 import java.io.IOException;
+=======
+>>>>>>> branch 'master' of https://github.com/LucyBai/AlgorithmFinal.git
 import java.util.Random;
 
 
@@ -86,6 +89,7 @@ public class GA {
   }
   
   private void transRoute(Individual in ) {
+<<<<<<< HEAD
 	  
 	  int []deximalCity = new int [in.getBinaryCity().length];
 	  String[]binaryCity = in.getBinaryCity();
@@ -98,6 +102,18 @@ public class GA {
   
   
   public static void main(String[] args) throws IOException {
+=======
+	  int []deximalCity = new int [in.getBinaryCity().length];
+	  String[]binaryCity = in.getBinaryCity();
+	  for(int i=0;i<in.getBinaryCity().length;i++) {
+		  deximalCity[i] = Integer.parseInt(binaryCity[i],2);
+		  System.out.println("deci+ "+deximalCity[i]);
+	  }
+  }
+  
+  
+  public static void main(String[] args) {
+>>>>>>> branch 'master' of https://github.com/LucyBai/AlgorithmFinal.git
       GA ga = new GA();
 //      ga.generateIndividual(20);
  //     ga.generatePopulation(20,10);
