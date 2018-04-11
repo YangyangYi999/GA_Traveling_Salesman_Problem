@@ -6,18 +6,24 @@ import java.util.Random;
 
 
 public class GA {  
-  private Population population;
+  private Population population = new Population();
   private Random random;
-  private Individual indi;
+ 
   
   private void generatePopulation(int cityNumber,int pathNumber) {
 	  for(int i=0;i<pathNumber;i++) {
-		  
+		  population.addIndividual(generateIndividual(cityNumber));
+	  }
+	  for(Individual x:population.getPopulation()) {
+		  for(String s: x.getBinaryCity()) {
+		  System.out.println(s);}
+		  System.out.println("---------------");
 	  }
   }
   
-  private void generateIndividual(int cityNumber) {
-	 double d = Math.log(cityNumber)/Math.log(2);
+  private Individual  generateIndividual(int cityNumber) {
+	  Individual indi = new Individual();
+	  double d = Math.log(cityNumber)/Math.log(2);
 	 int digits = (int) Math.ceil(d);
 	
 	 int y;
@@ -47,14 +53,22 @@ public class GA {
 				 }
 			 }
 			 
-			 System.out.println(binaryCity[i]);}
+			}
 		 
 		 else {
 			 i--;
 		 }
 	 }
-	   
+	// System.out.println(binaryCity.length);
+	 indi.setBinaryCity(binaryCity);
+	 //System.out.println(indi.getBinaryCity().length);
+	 return indi;
+//	 for(String x:binaryCity) {
+//	 System.out.println(x);};
   }
+  
+  
+  
   private Boolean transTo(int cityNumber,String gene) {
 	   int digit =Integer.parseInt(gene,2);
 	   if(digit<=cityNumber) {
@@ -67,7 +81,8 @@ public class GA {
   
   public static void main(String[] args) {
       GA ga = new GA();
-      ga.generateIndividual(20);
+//      ga.generateIndividual(20);
+      ga.generatePopulation(20,10);
       
   }
 } 
