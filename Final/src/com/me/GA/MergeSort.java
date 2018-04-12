@@ -14,7 +14,7 @@ package com.me.GA;
 
 
 /**
- * @author Junyuan GU
+ * @author Yangyang Yi & Lu Bai
  */
 public class MergeSort {
     public Comparable[] aC;

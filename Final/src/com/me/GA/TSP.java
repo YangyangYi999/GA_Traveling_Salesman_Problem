@@ -16,7 +16,7 @@ public class TSP {
   
   private Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
 	  
-	  distance=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
+	  distance=co.init("/Users/yiyangyang/Downloads/data.txt", 48);
 	  for(int i=0;i<10;i++) {
     	  for(int j=0;j<10;j++) {
     		  System.out.print(" "+distance[i][j]);
@@ -113,9 +113,6 @@ public class TSP {
   }
   
   
- 
-  
-  
   public static void main(String[] args) throws IOException{
       TSP tsp = new TSP();
       GA ga = new GA();
@@ -135,11 +132,5 @@ public class TSP {
     		  System.out.println();
     		  System.out.println("---------------");
       }
-     
-     
-     
-      
-      
-      
   }
 } 
