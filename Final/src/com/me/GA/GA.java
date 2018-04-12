@@ -15,7 +15,6 @@ public class GA {
 		for(int i=0;i<population.getPopulation().size();i++) {
 			Individual in = population.getPopulation().get(i);
 			fitness[i] = (double)1/in.getDistance();
-			
 		}
 		selectIndividuals(fitness,population);
 		rouletteSelect(fitness,population);
@@ -108,5 +107,16 @@ public class GA {
          * for(k=0;k<scale;k++) { System.out.println(fitness[k]+" "+Pi[k]); } 
          */  
     }
+	
+	public Population newPopulation (Individual[] selectedIndvs,Individual[] goodIndv ) {
+		Population newPopulation = new Population();
+		for(Individual in: selectedIndvs) {
+			newPopulation.addIndividual(in);
+		}
+		for(Individual in: goodIndv) {
+			newPopulation.addIndividual(in);
+		}
+		return newPopulation;
+	}
 }
 
