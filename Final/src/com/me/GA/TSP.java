@@ -7,25 +7,41 @@ import java.util.Random;
 
 
 
-public class GA {  
-  private Population population = new Population();
+public class TSP {  
+  
+ 
+  Coordinates co = new Coordinates();
+  static int[][]distance;
  
   
-  private void generatePopulation(int cityNumber,int pathNumber) {
+  private Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
+	  
+	  distance=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
+	  for(int i=0;i<10;i++) {
+    	  for(int j=0;j<10;j++) {
+    		  System.out.print(" "+distance[i][j]);
+    		  
+    	  }
+    	  System.out.println();
+      }
+ 
 	  for(int i=0;i<pathNumber;i++) {
 		  population.addIndividual(generateIndividual(cityNumber));
 	  }
 	  for(Individual x:population.getPopulation()) {
 		  transRoute(x);
-		  for(String s: x.getBinaryCity()) {
-		  System.out.print(s+",");}
-		  System.out.println();
-		  for(int m: x.getDecimalCity()) {
-			  System.out.print(m+",");
-		  }
-		  System.out.println();
-		  System.out.println("---------------");
+		 System.out.println(x.calculateDistance()); 
+		  
+//		  for(String s: x.getBinaryCity()) {
+//		  System.out.print(s+",");}
+//		  System.out.println();
+//		  for(int m: x.getDecimalCity()) {
+//			  System.out.print(m+",");
+//		  }
+//		  System.out.println();
+//		  System.out.println("---------------");
 	  }
+	  return population;
   }
   
   private Individual  generateIndividual(int cityNumber) {
@@ -87,8 +103,6 @@ public class GA {
   }
   
   private void transRoute(Individual in ) {
-
-	  
 	  int []deximalCity = new int [in.getBinaryCity().length];
 	  String[]binaryCity = in.getBinaryCity();
 	  for(int i=0;i<in.getBinaryCity().length;i++) {
@@ -103,19 +117,28 @@ public class GA {
   
   
   public static void main(String[] args) throws IOException{
+      TSP tsp = new TSP();
       GA ga = new GA();
-//      ga.generateIndividual(20);
- //     ga.generatePopulation(20,10);
-      Coordinates co = new Coordinates();
-      int [][] xy;
-      xy=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
-      for(int i=0;i<10;i++) {
-    	  for(int j=0;j<10;j++) {
-    		  System.out.print(" "+xy[i][j]);
-    		  
-    	  }
-    	  System.out.println();
+      
+    //  ga.generateIndividual(20);
+      Population population = new Population();
+      population=tsp.generatePopulation(population,10,5);
+      Double sortedFit[] = ga.fitness(population);
+      System.out.println(sortedFit[0]);
+      for(Individual x:population.getPopulation()) {
+    	  for(String s: x.getBinaryCity()) {
+    		  System.out.print(s+",");}
+    		  System.out.println();
+    		  for(int m: x.getDecimalCity()) {
+    			  System.out.print(m+",");
+    		  }
+    		  System.out.println();
+    		  System.out.println("---------------");
       }
+     
+     
+     
+      
       
       
   }
