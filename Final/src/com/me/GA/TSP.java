@@ -12,18 +12,18 @@ public class TSP {
  
   Coordinates co = new Coordinates();
   static int[][]distance;
- 
+  
   
   private Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
 	  
-	  distance=co.init("/Users/yiyangyang/Downloads/data.txt", 48);
-	  for(int i=0;i<10;i++) {
-    	  for(int j=0;j<10;j++) {
-    		  System.out.print(" "+distance[i][j]);
-    		  
-    	  }
-    	  System.out.println();
-      }
+	  distance=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
+//	  for(int i=0;i<10;i++) {
+//    	  for(int j=0;j<10;j++) {
+//    		  System.out.print(" "+distance[i][j]);
+//    		  
+//    	  }
+//    	  System.out.println();
+//      }
  
 	  for(int i=0;i<pathNumber;i++) {
 		  population.addIndividual(generateIndividual(cityNumber));
@@ -102,7 +102,7 @@ public class TSP {
 	   }
   }
   
-  private void transRoute(Individual in ) {
+  public static void transRoute(Individual in ) {
 	  int []deximalCity = new int [in.getBinaryCity().length];
 	  String[]binaryCity = in.getBinaryCity();
 	  for(int i=0;i<in.getBinaryCity().length;i++) {
@@ -119,18 +119,38 @@ public class TSP {
       
     //  ga.generateIndividual(20);
       Population population = new Population();
-      population=tsp.generatePopulation(population,10,5);
-      Double sortedFit[] = ga.fitness(population);
-      System.out.println(sortedFit[0]);
-      for(Individual x:population.getPopulation()) {
-    	  for(String s: x.getBinaryCity()) {
-    		  System.out.print(s+",");}
-    		  System.out.println();
-    		  for(int m: x.getDecimalCity()) {
-    			  System.out.print(m+",");
-    		  }
-    		  System.out.println();
-    		  System.out.println("---------------");
+      population=tsp.generatePopulation(population,48,50);
+      System.out.println("Original Population:");
+//      for(Individual x:population.getPopulation()) {
+//    	  for(String s: x.getBinaryCity()) {
+//    		  System.out.print(s+",");}
+//    		  System.out.println();
+//    		  for(int m: x.getDecimalCity()) {
+//    			  System.out.print(m+",");
+//    		  }
+//    		  System.out.println();
+//    		  System.out.println("---------------");
+//      }
+      
+      for(int i=0;i<3000;i++) {
+
+    	population = ga.evolution(population,0.01f);
+        
       }
+      int g = ga.getBestGeneration();
+      System.out.println("Best Generation"+ g);
+      System.out.println("Best Distance"+ ga.getBestIndividual().getDistance());
+      int[] bestRoute = ga.getBestIndividual().getDecimalCity();
+      for(int i=0;i<bestRoute.length;i++) {
+    	  System.out.print(bestRoute[i]+", ");
+      }
+      System.out.println();
+        
+        
+        
+        
+//      Double sortedFit[] = ga.evolution(population);
+//      System.out.println(sortedFit[0]);
+ 
   }
 } 
