@@ -8,9 +8,7 @@ import java.util.Random;
 
 public class Coordinates {
 
-	  public int[][] init(String filename,int cityNum) throws IOException { 
-		  
-	        
+	  public int[][] init(String filename,int cityNum) throws IOException {   
 		    int distance[][];
 	        int[] x;  
 	        int[] y;  
@@ -45,26 +43,21 @@ public class Coordinates {
 	            }  
 	        }  
 	        distance[cityNum - 1][cityNum - 1] = 0;  
-	  
-//	        bestLength = Integer.MAX_VALUE;  
-//	        bestTour = new int[cityNum + 1];  
-//	        bestT = 0;  
-//	        t = 0;  
-//	  
-//	        newPopulation = new int[scale][cityNum];  
-//	        oldPopulation = new int[scale][cityNum];  
-//	        fitness = new int[scale];  
-//	        Pi = new float[scale];  
-//	  
-//	        random = new Random(System.currentTimeMillis());  
-	        /* 
-	         * for(int i=0;i<cityNum;i++) { for(int j=0;j<cityNum;j++) { 
-	         * System.out.print(distance[i][j]+","); } System.out.println(); } 
-	         */  
-	     
+
 	    return distance;
 	    }  
-	  
+	  public int calculateDistance(Individual in, int distance[][]) {
+	    	int totalDistance=0;
+	    	int[]decimalCity = in.getDecimalCity();
+	    	for(int d=0;d<decimalCity.length-1;d++) {
+	    		totalDistance+=distance[decimalCity[d]][decimalCity[d+1]];    		
+	    	}
+//	    	System.out.println("total distance: "+totalDistance);
+	    	totalDistance+=distance[decimalCity[decimalCity.length-1]][decimalCity[0]];
+	    	in.setDistance(totalDistance);
+	      return totalDistance;
+	    	
+	    }
 
 	
 }

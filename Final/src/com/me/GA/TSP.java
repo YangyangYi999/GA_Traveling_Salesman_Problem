@@ -16,7 +16,7 @@ public class TSP {
   
   public Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
 	  
-	  distance=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
+	  distance=co.init("/Users/yiyangyang/Downloads/data.txt", 48);
 //	  for(int i=0;i<10;i++) {
 //    	  for(int j=0;j<10;j++) {
 //    		  System.out.print(" "+distance[i][j]);
@@ -30,7 +30,7 @@ public class TSP {
 	  }
 	  for(Individual x:population.getPopulation()) {
 		  transRoute(x);
-		 System.out.println(x.calculateDistance()); 
+		  x.calculateDistance(); 
 		  
 //		  for(String s: x.getBinaryCity()) {
 //		  System.out.print(s+",");}
@@ -132,9 +132,9 @@ public class TSP {
 //    		  System.out.println("---------------");
 //      }
       
-      for(int i=0;i<300;i++) {
+      for(int i=0;i<1000;i++) {
 
-    	population = ga.evolution(population,0.8f);
+    	population = ga.evolution(population,0.015f);
         
       }
       int g = ga.getBestGeneration();

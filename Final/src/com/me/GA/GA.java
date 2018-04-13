@@ -1,8 +1,10 @@
 package com.me.GA;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+
 
 public class GA {
 	private static Random random = new Random();
@@ -34,15 +36,29 @@ public class GA {
 		System.out.println("currentGeneration: "+currentGeneration);
 		System.out.println("best Individual:");
 		for (int i : a[0].getDecimalCity()) {
-			System.out.print(i);
+			System.out.print(i+",");
 		}
 		System.out.println();
-		System.out.println(a[0].getDistance());
-		
+		System.out.println("currentDistance:"+a[0].getDistance());	
 		bestIndividual(a[0],currentGeneration);
-		Individual[] b = rouletteSelect(fitness, population);
-		Population newPopulation = newPopulation(a, b);
-		System.out.println("New Population:");
+		Population newPopulation = newPopulation(a);
+		
+		int childNumber = population.getPopulation().size()-a.length;
+		
+		for(int i=0; i<childNumber;i++) {
+			Individual parents1 = rouletteSelect(fitness, population);
+			Individual parents2 = rouletteSelect(fitness, population);
+			Individual child = crossover(parents1,parents2);
+			
+			Float r =random.nextFloat();
+			if(r<pm) {
+			child=mutation(child);
+					}
+			newPopulation.addIndividual(child);
+			
+		}
+		
+//		System.out.println("New Population:");
 //		for (Individual x : newPopulation.getPopulation()) {
 //			for (String s : x.getBinaryCity()) {
 //				System.out.print(s + ",");
@@ -54,49 +70,62 @@ public class GA {
 //			System.out.println();
 //			System.out.println("---------------");
 //		}
-		// 交叉方法
-
-		for (int k = 0; k < population.getPopulation().size() - 1; k = k + 2) {
-			// Float r = random.nextFloat();// /产生概率
-			// System.out.println("交叉率..." + r);
-			// if (r < Pc) {
-			// // System.out.println(k + "与" + k + 1 + "进行交叉...");
-			// //OXCross(k, k + 1);// 进行交叉
-			// OXCross1(k, k + 1);
-			// } else {
-			Float r = random.nextFloat();// /产生概率
-			System.out.println("变异率1..." + r);
-			// 变异
-			if (r < pm) {
-				System.out.println(k + "变异...");
-				newPopulation = mutation(newPopulation, k);
-			}
-			r = random.nextFloat();// /产生概率
-			// System.out.println("变异率2..." + r);
-			// 变异
-			if (r < pm) {
-				System.out.println(k + 1 + "变异...");
-				newPopulation = mutation(newPopulation, k + 1);
-			}
-		}
-		System.out.println("Mutate Population:");
-		for (Individual x : newPopulation.getPopulation()) {
-			for (String s : x.getBinaryCity()) {
-				System.out.print(s + ",");
-			}
-			System.out.println();
-			for (int m : x.getDecimalCity()) {
-				System.out.print(m + ",");
-			}
-			System.out.println();
-			System.out.println("---------------");
-		}
+		
 		return newPopulation;
 	}
+	
+	public Individual crossover(Individual p1,Individual p2) {
+		    Individual child = new Individual();
 
-	public Population mutation(Population population, int k) {
-		System.out.println("number mutate " + k);
-		Individual in = population.getPopulation().get(k);
+	        // Get start and end sub tour positions for parent1's tour
+	        int startPos = (int) (Math.random() *p1.getBinaryCity().length);
+	        int endPos = (int) (Math.random() * p2.getBinaryCity().length);
+	        String p1BinaryCity[] = p1.getBinaryCity();
+	        String p2BinaryCity[] = p2.getBinaryCity();
+	        String[]binaryCity = new String[p1BinaryCity.length];
+	        // Loop and add the sub tour from parent1 to our child
+	        for (int i = 0; i < p1.getBinaryCity().length; i++) {
+	            // If our start position is less than the end position
+	            if (startPos < endPos && i > startPos && i < endPos) {
+	            
+	                binaryCity[i] = p1BinaryCity[i];
+	             //   System.out.println("p1: "+binaryCity[i]);
+	            } // If our start position is larger
+	            else if (startPos > endPos) {
+	                if (!(i < startPos && i > endPos)) {
+	                	
+	                	 binaryCity[i] = p1BinaryCity[i];
+	                	// System.out.println("p1: "+binaryCity[i]);
+	                }
+	            }
+	        }
+
+	        // Loop through parent2's city tour
+	        for (int i = 0; i < p2.getBinaryCity().length; i++) {
+	            // If child doesn't have the city add it !child.containsCity(parent2.getCity(i))
+	            if (!Arrays.asList(binaryCity).contains(p2BinaryCity[i])) {
+	                // Loop to find a spare position in the child's tour
+	                for (int j = 0; j < p2.getBinaryCity().length; j++) {
+	                    // Spare position found, add city
+	                    if (binaryCity[j]==null) {
+	                    	binaryCity[j] = p2BinaryCity[i];
+	                    	//System.out.println("p2: "+binaryCity[i]);
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	        
+	        child.setBinaryCity(binaryCity);
+	        
+	        TSP.transRoute(child);
+	        child.calculateDistance();
+	        return child;
+	}
+
+	public Individual mutation(Individual in) {
+		//System.out.println("number mutate " + k);
+	//	Individual in = population.getPopulation().get(k);
 		int r1 = random.nextInt(in.getBinaryCity().length);
 		int r2 = random.nextInt(in.getBinaryCity().length);
 		while (r1 == r2) {
@@ -105,13 +134,11 @@ public class GA {
 		String[] binaryCity = in.getBinaryCity();
 		String e1 = binaryCity[r1];
 		binaryCity[r1] = binaryCity[r2];
-		binaryCity[r2] = e1;
-
+		binaryCity[r2] = e1;        
 		in.setBinaryCity(binaryCity);
 		TSP.transRoute(in);
 		in.calculateDistance();
-
-		return population;
+		return in;
 	}
 
 	public Double[] fitness(Population population, Double[] fitness) {
@@ -138,13 +165,15 @@ public class GA {
 				bestIndividual.setDecimalCity(in.getDecimalCity());
 				bestIndividual.setDistance(in.getDistance());
 				bestGeneration = generation;
+				MyPanel m = new MyPanel();
+		        m.getData(bestIndividual);
 			}
 		}
 		
 	}
 	public Individual[] selectBest(Double[] fitness, Population population) {
 		int size = fitness.length;
-		int selectNum = (int) Math.ceil(0.5 * size);
+		int selectNum = (int) Math.floor(0.1 * size);
 		Double[] Dfit = new Double[size];
 		for (int i = 0; i < size; i++)
 			Dfit[i] = fitness[i];
@@ -176,8 +205,9 @@ public class GA {
 		return goodIndv;
 	}
 
-	public static Individual[] rouletteSelect(Double[] fitness, Population pop) {
-		Individual[] selectedIndvs = new Individual[(int) (Math.floor(0.5 * (pop.getPopulation().size())))];
+	public static Individual rouletteSelect(Double[] fitness, Population pop) {
+		//Individual[] selectedIndvs = new Individual[(int) (Math.floor(0.5 * (pop.getPopulation().size())))];
+		Individual rouletteIndividual = new Individual();
 		int k;
 		int i;
 		double r;
@@ -194,41 +224,20 @@ public class GA {
 		for (k = 1; k < pop.getPopulation().size(); k++) {
 			accumulatePro[k] = (float) (tempf[k] / sumFitness + accumulatePro[k - 1]);
 		}
-
-		for (k = 0; k < selectedIndvs.length; k++) {
-
 			r = Math.random();
 			for (i = 0; i < pop.getPopulation().size(); i++) {
 				if (r <= accumulatePro[i]) {
 					break;
 				}
 			}
+            rouletteIndividual = pop.getPopulation().get(i);
 
-			selectedIndvs[k] = pop.getPopulation().get(i);
-		}
-
-//		for (Individual in : selectedIndvs) {
-//			for (int j : in.getDecimalCity()) {
-//				System.out.print(j + ", ");
-//			}
-//			System.out.println();
-//			System.out.println("random individual " + in.getDistance());
-//
-//		}
-
-		return selectedIndvs;
-
-		/*
-		 * for(k=0;k<scale;k++) { System.out.println(fitness[k]+" "+Pi[k]); }
-		 */
+		return rouletteIndividual;
 	}
 
-	public Population newPopulation(Individual[] selectedIndvs, Individual[] goodIndv) {
+	public Population newPopulation(Individual[] selectedIndvs) {
 		Population newPopulation = new Population();
 		for (Individual in : selectedIndvs) {
-			newPopulation.addIndividual(in);
-		}
-		for (Individual in : goodIndv) {
 			newPopulation.addIndividual(in);
 		}
 		return newPopulation;

@@ -75,40 +75,7 @@ public class MergeSort {
         }
         return true;
     }
-    
-    /*
-    public static void main( String[] Args ) {
-    
 
-        System.out.println("sort test1");
-        Comparable[] a1 = {"S","O","R","T","E","X","A","M","P","L"};
-        //int mid = (a1.length%2)==0 ? (a1.length/2-1) : a1.length/2;
-        int hi = a1.length - 1;
-        MergeSort instance1 = new MergeSort(a1);
-        
-        StopWatch sw1 = new StopWatch();
-        sw1.start();
-        instance1.sort(a1, 0, hi);
-        sw1.stop();
-        assertTrue(instance1.isSorted(a1));
-        instance1.show(a1);
-        System.out.println( "The elapse time of sort is " + sw1.getNanoTime() );
-        
-   
-
-        System.out.println("sort test2");
-        Comparable[] a2 = {"bed","bug","dad","yes","zoo","all","bad","yet"};
-        //mid = (a2.length%2)==0 ? (a2.length/2-1) : a2.length/2;
-        hi = a2.length - 1;
-        MergeSort instance2 = new MergeSort(a2);
-        StopWatch sw = new StopWatch();
-        sw.start();
-        instance2.sort( a2, 0, hi );
-        sw.stop();
-        instance2.show(a2);
-        assertTrue(instance2.isSorted(a2));
-        System.out.println( "The elapse time of sort is " + sw.getNanoTime() );
-    }*/
     
 }
 
