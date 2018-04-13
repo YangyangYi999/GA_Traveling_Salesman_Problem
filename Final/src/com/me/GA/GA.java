@@ -43,17 +43,17 @@ public class GA {
 		Individual[] b = rouletteSelect(fitness, population);
 		Population newPopulation = newPopulation(a, b);
 		System.out.println("New Population:");
-		for (Individual x : newPopulation.getPopulation()) {
-			for (String s : x.getBinaryCity()) {
-				System.out.print(s + ",");
-			}
-			System.out.println();
-			for (int m : x.getDecimalCity()) {
-				System.out.print(m + ",");
-			}
-			System.out.println();
-			System.out.println("---------------");
-		}
+//		for (Individual x : newPopulation.getPopulation()) {
+//			for (String s : x.getBinaryCity()) {
+//				System.out.print(s + ",");
+//			}
+//			System.out.println();
+//			for (int m : x.getDecimalCity()) {
+//				System.out.print(m + ",");
+//			}
+//			System.out.println();
+//			System.out.println("---------------");
+//		}
 		// 交叉方法
 
 		for (int k = 0; k < population.getPopulation().size() - 1; k = k + 2) {
@@ -164,15 +164,15 @@ public class GA {
 			selectNum--;
 
 		} while (selectNum > 0);
-
-		for (Individual in : goodIndv) {
-			for (int j : in.getDecimalCity()) {
-				System.out.print(j + ", ");
-			}
-			System.out.println();
-			System.out.println("good individual " + in.getDistance());
-
-		}
+//
+//		for (Individual in : goodIndv) {
+//			for (int j : in.getDecimalCity()) {
+//				System.out.print(j + ", ");
+//			}
+//			System.out.println();
+//			System.out.println("good individual " + in.getDistance());
+//
+//		}
 		return goodIndv;
 	}
 
@@ -207,14 +207,14 @@ public class GA {
 			selectedIndvs[k] = pop.getPopulation().get(i);
 		}
 
-		for (Individual in : selectedIndvs) {
-			for (int j : in.getDecimalCity()) {
-				System.out.print(j + ", ");
-			}
-			System.out.println();
-			System.out.println("random individual " + in.getDistance());
-
-		}
+//		for (Individual in : selectedIndvs) {
+//			for (int j : in.getDecimalCity()) {
+//				System.out.print(j + ", ");
+//			}
+//			System.out.println();
+//			System.out.println("random individual " + in.getDistance());
+//
+//		}
 
 		return selectedIndvs;
 

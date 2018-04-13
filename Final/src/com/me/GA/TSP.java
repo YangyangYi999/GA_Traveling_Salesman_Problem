@@ -14,7 +14,7 @@ public class TSP {
   static int[][]distance;
   
   
-  private Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
+  public Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
 	  
 	  distance=co.init("C:\\Users\\Lucy Bai\\Desktop\\data.txt", 48);
 //	  for(int i=0;i<10;i++) {
@@ -132,9 +132,9 @@ public class TSP {
 //    		  System.out.println("---------------");
 //      }
       
-      for(int i=0;i<3000;i++) {
+      for(int i=0;i<300;i++) {
 
-    	population = ga.evolution(population,0.01f);
+    	population = ga.evolution(population,0.8f);
         
       }
       int g = ga.getBestGeneration();
