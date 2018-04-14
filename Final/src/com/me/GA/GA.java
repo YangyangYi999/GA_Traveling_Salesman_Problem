@@ -119,7 +119,7 @@ public class GA {
 	        child.setBinaryCity(binaryCity);
 	        
 	        TSP.transRoute(child);
-	        child.calculateDistance();
+	        child.calculateDistance(child,TSP.distance);
 	        return child;
 	}
 
@@ -137,7 +137,7 @@ public class GA {
 		binaryCity[r2] = e1;        
 		in.setBinaryCity(binaryCity);
 		TSP.transRoute(in);
-		in.calculateDistance();
+		in.calculateDistance(in,TSP.distance);
 		return in;
 	}
 

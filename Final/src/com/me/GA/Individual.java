@@ -4,18 +4,30 @@ public class Individual {
 	private String binaryCity[];
 	private int decimalCity[];
     private int distance;
+ 
     
-    public int calculateDistance() {
-    	int totalDistance=0;
-    	for(int d=0;d<decimalCity.length-1;d++) {
-    		totalDistance+=TSP.distance[decimalCity[d]][decimalCity[d+1]];    		
-    	}
-    	totalDistance+=TSP.distance[decimalCity[decimalCity.length-1]][decimalCity[0]];
-    	this.setDistance(totalDistance);
-      return totalDistance;
-    	
-    }
-    
+//    public  int calculateDistance() {
+//    	int totalDistance=0;
+//    	for(int d=0;d<decimalCity.length-1;d++) {
+//    		totalDistance+=TSP.distance[decimalCity[d]][decimalCity[d+1]];    		
+//    	}
+//    	totalDistance+=TSP.distance[decimalCity[decimalCity.length-1]][decimalCity[0]];
+//    	this.setDistance(totalDistance);
+//      return totalDistance;
+//    	
+//    }
+	  public int calculateDistance(Individual in, int distance[][]) {
+	    	int totalDistance=0;
+	    	int[]decimalCity = in.getDecimalCity();
+	    	for(int d=0;d<decimalCity.length-1;d++) {
+	    		totalDistance+=distance[decimalCity[d]][decimalCity[d+1]];    		
+	    	}
+//	    	System.out.println("total distance: "+totalDistance);
+	    	totalDistance+=distance[decimalCity[decimalCity.length-1]][decimalCity[0]];
+	    	in.setDistance(totalDistance);
+	      return totalDistance;
+	    	
+	    }
 
 	public int getDistance() {
 		return distance;

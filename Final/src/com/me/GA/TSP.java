@@ -12,13 +12,14 @@ public class TSP {
   
  
   Coordinates co = new Coordinates();
-  static int[][]distance;
-  
-  
-  public Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
+  static int[][] distance;
+
+public Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
 
 	  File f = new File("src/data.txt");
 	  distance=co.init(f.getPath(), 48);
+	  
+	  
 
 //	  for(int i=0;i<10;i++) {
 //    	  for(int j=0;j<10;j++) {
@@ -33,7 +34,7 @@ public class TSP {
 	  }
 	  for(Individual x:population.getPopulation()) {
 		  transRoute(x);
-		  x.calculateDistance(); 
+		  x.calculateDistance(x,distance); 
 		  
 //		  for(String s: x.getBinaryCity()) {
 //		  System.out.print(s+",");}
@@ -105,7 +106,7 @@ public class TSP {
 	   }
   }
   
-  public static void transRoute(Individual in ) {
+  public static int [] transRoute(Individual in ) {
 	  int []deximalCity = new int [in.getBinaryCity().length];
 	  String[]binaryCity = in.getBinaryCity();
 	  for(int i=0;i<in.getBinaryCity().length;i++) {
@@ -113,6 +114,7 @@ public class TSP {
 		 // System.out.println("deci+ "+deximalCity[i]);
 	  }
 	  in.setDecimalCity(deximalCity);
+	  return deximalCity;
   }
   
   
