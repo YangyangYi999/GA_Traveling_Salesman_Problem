@@ -233,12 +233,9 @@ public class GA {
 		for (k = 1; k < pop.getPopulation().size(); k++) {
 			accumulatePro[k] = (float) (tempf[k] / sumFitness + accumulatePro[k - 1]);
 		}
-			r = Math.random();
+			r = (float) (random.nextInt(65535) % 1000 / 1000.0);
 			for (i = 0; i < pop.getPopulation().size(); i++) {
 				if (r <= accumulatePro[i]) {
-					break;
-				}
-				else if(i==pop.getPopulation().size()-1) {
 					break;
 				}
 			}
