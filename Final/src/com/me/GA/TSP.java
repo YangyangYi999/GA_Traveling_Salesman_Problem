@@ -4,32 +4,27 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Random;
+import java.util.logging.Logger;
+/**
+ * @author Yangyang Yi & Lu Bai
+ */
 
 public class TSP {
-
+    public static Logger log = Logger.getLogger(TSP.class.getName());
 	Coordinates co = new Coordinates();
 	static int[][] distance;
-
+    //Initializing population
 	public Population generatePopulation(Population population, int cityNumber, int pathNumber) throws IOException {
 
 		File f = new File("src/data.txt");
+		//Initializing distance [][]
 		distance = co.init(f.getPath(), 48);
-
-		// for(int i=0;i<10;i++) {
-		// for(int j=0;j<10;j++) {
-		// System.out.print(" "+distance[i][j]);
-		//
-		// }
-		// System.out.println();
-		// }
-
 		for (int i = 0; i < pathNumber; i++) {
 			population.addIndividual(generateIndividual(cityNumber));
 		}
 		for (Individual x : population.getPopulation()) {
 			transRoute(x);
 			x.calculateDistance(x, distance);
-
 			// for(String s: x.getBinaryCity()) {
 			// System.out.print(s+",");}
 			// System.out.println();
@@ -41,9 +36,11 @@ public class TSP {
 		}
 		return population;
 	}
-
+    
+	//Generate binary array to set individual
 	private Individual generateIndividual(int cityNumber) {
 		Individual indi = new Individual();
+		//Calculate the digits of the binary
 		double d = Math.log(cityNumber) / Math.log(2);
 		int digits = (int) Math.ceil(d);
 
@@ -67,6 +64,7 @@ public class TSP {
 				}
 
 				for (int t = 0; t < i; t++) {
+				//Check duplicates
 					if ((binaryCity[t].equals(gene))) {
 						flag = false;
 						i--;
@@ -83,12 +81,10 @@ public class TSP {
 				i--;
 			}
 		}
-		// System.out.println(binaryCity.length);
+		
 		indi.setBinaryCity(binaryCity);
-		// System.out.println(indi.getBinaryCity().length);
 		return indi;
-		// for(String x:binaryCity) {
-		// System.out.println(x);};
+	
 	}
 
 	private Boolean transTo(int cityNumber, String gene) {
@@ -99,7 +95,7 @@ public class TSP {
 			return false;
 		}
 	}
-
+   //Transfer binaryRote to decimalRote
 	public static int[] transRoute(Individual in) {
 		int[] deximalCity = new int[in.getBinaryCity().length];
 		String[] binaryCity = in.getBinaryCity();
@@ -111,38 +107,33 @@ public class TSP {
 		return deximalCity;
 	}
 
-//	public static void main(String[] args) throws IOException {
-////		TSP tsp = new TSP();
-////		GA ga = new GA();
-////
-////	
-////		Population population = new Population();
-////		population = tsp.generatePopulation(population, 48, 500);
-////
-////
-////		for (int i = 0; i < 1000; i++) {
-////
-////			population = ga.evolution(population, 0.015f);
-////
-////		}
-////		int g = ga.getBestGeneration();
-////		System.out.println("Best Generation: " + g);
-////
-////		int[] bestRoute = ga.getBestIndividual().getDecimalCity();
-////		String[] binaryRoute = ga.getBestIndividual().getBinaryCity();
-////		System.out.println("Best Individual : ");
-////		for (int i = 0; i < binaryRoute.length; i++) {
-////			System.out.print(binaryRoute[i] + ", ");
-////		}
-////		System.out.println();
-////		for (int i = 0; i < bestRoute.length; i++) {
-////			System.out.print(bestRoute[i] + ", ");
-////		}
-////		System.out.println();
-////		System.out.println("Best Distance :" + ga.getBestIndividual().getDistance());
-//
-//		// Double sortedFit[] = ga.evolution(population);
-//		// System.out.println(sortedFit[0]);
-//
-//	}
+	public static void main(String[] args) throws IOException {
+		TSP tsp = new TSP();
+		GA ga = new GA();
+		Population population = new Population();
+		//Generate the original population including set the city number and the route number
+		population = tsp.generatePopulation(population, 48, 500);
+		//Do loop until the generation times is 1000
+		for (int i = 0; i < 1000; i++) {
+			population = ga.evolution(population, 0.015f);
+		}
+		 log.info("Best Generation !!!!!!!!!");
+		int g = ga.getBestGeneration();
+		System.out.println("Best Generation: " + g);
+
+		int[] bestRoute = ga.getBestIndividual().getDecimalCity();
+		String[] binaryRoute = ga.getBestIndividual().getBinaryCity();
+		System.out.println("Best Individual : ");
+		for (int i = 0; i < binaryRoute.length; i++) {
+			System.out.print(binaryRoute[i] + ", ");
+		}
+		System.out.println();
+		for (int i = 0; i < bestRoute.length; i++) {
+			System.out.print(bestRoute[i] + ", ");
+		}
+		System.out.println();
+		System.out.println("Best Distance :" + ga.getBestIndividual().getDistance());
+
+	
+	}
 }

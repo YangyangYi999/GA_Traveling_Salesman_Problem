@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
-
+/**
+ * @author Yangyang Yi & Lu Bai
+ */
 public class Coordinates {
 
 	  public int[][] init(String filename,int cityNum) throws IOException {   
@@ -13,6 +15,7 @@ public class Coordinates {
 	        int[] x;  
 	        int[] y;  
 	        String strbuff;  
+	        // read data from file
 	        BufferedReader data = new BufferedReader(new InputStreamReader(  
 	                new FileInputStream(filename)));  
 	        distance = new int[cityNum][cityNum];  
@@ -24,7 +27,6 @@ public class Coordinates {
 	            x[i] = Integer.valueOf(strcol[1]);
 	            y[i] = Integer.valueOf(strcol[2]);
 	        }  
-	        
 	        for (int i = 0; i < cityNum - 1; i++) {  
 	            distance[i][i] = 0; 
 	            for (int j = i + 1; j < cityNum; j++) {  

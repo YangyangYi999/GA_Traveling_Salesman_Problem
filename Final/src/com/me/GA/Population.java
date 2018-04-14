@@ -1,7 +1,9 @@
 package com.me.GA;
 
 import java.util.ArrayList;
-
+/**
+ * @author Yangyang Yi & Lu Bai
+ */
 public class Population {
 	private ArrayList <Individual> population = new ArrayList<Individual>();
     
