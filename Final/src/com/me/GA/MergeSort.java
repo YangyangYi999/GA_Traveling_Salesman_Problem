@@ -11,8 +11,6 @@ package com.me.GA;
  * and open the template in the editor.
  */
 
-
-
 /**
  * @author Yangyang Yi & Lu Bai
  */
