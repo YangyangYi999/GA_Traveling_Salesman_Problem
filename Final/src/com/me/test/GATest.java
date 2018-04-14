@@ -34,7 +34,6 @@ class GATest {
 		String binaryCity[] = new String[3];
 		for (int i = 0; i < 3; i++) {
 			binaryCity[i] = Integer.toBinaryString(i);
-			// System.out.println(binaryCity[i]);
 		}
 		in.setBinaryCity(binaryCity);
 		TSP.transRoute(in);

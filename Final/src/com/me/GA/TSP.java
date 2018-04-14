@@ -124,8 +124,8 @@ public Population generatePopulation(Population population,int cityNumber,int pa
       
     //  ga.generateIndividual(20);
       Population population = new Population();
-      population=tsp.generatePopulation(population,48,50);
-      System.out.println("Original Population:");
+      population=tsp.generatePopulation(population,48,500);
+//      System.out.println("Original Population:");
 //      for(Individual x:population.getPopulation()) {
 //    	  for(String s: x.getBinaryCity()) {
 //    		  System.out.print(s+",");}
@@ -137,7 +137,7 @@ public Population generatePopulation(Population population,int cityNumber,int pa
 //    		  System.out.println("---------------");
 //      }
       
-      for(int i=0;i<3000;i++) {
+      for(int i=0;i<1000;i++) {
 
     	population = ga.evolution(population,0.015f);
         
@@ -146,11 +146,14 @@ public Population generatePopulation(Population population,int cityNumber,int pa
       System.out.println("Best Generation"+ g);
       System.out.println("Best Distance"+ ga.getBestIndividual().getDistance());
       int[] bestRoute = ga.getBestIndividual().getDecimalCity();
+      String[] binaryRoute = ga.getBestIndividual().getBinaryCity();
       for(int i=0;i<bestRoute.length;i++) {
     	  System.out.print(bestRoute[i]+", ");
       }
       System.out.println();
-        
+      for(int i=0;i<binaryRoute.length;i++) {
+    	  System.out.print(binaryRoute[i]+", ");
+      }
         
         
         

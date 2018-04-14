@@ -33,13 +33,22 @@ public class GA {
 		Double[] fitness = new Double[population.getPopulation().size()];
 		fitness = fitness(population);
 		Individual[] a = selectBest(fitness, population);
-		System.out.println("currentGeneration: "+currentGeneration);
-		System.out.println("best Individual:");
-		for (int i : a[0].getDecimalCity()) {
+		
+		System.out.println("CurrentGeneration: "+currentGeneration);
+		System.out.println("Best Individual:");
+		
+		for(String i:a[0].getBinaryCity()) {
 			System.out.print(i+",");
 		}
 		System.out.println();
-		System.out.println("currentDistance:"+a[0].getDistance());	
+		for (int i : a[0].getDecimalCity()) {
+			System.out.print(i+",");
+		}
+		
+		
+		System.out.println();
+		System.out.println("CurrentDistance:"+a[0].getDistance());	
+		System.out.println("====================================================");
 		bestIndividual(a[0],currentGeneration);
 		Population newPopulation = newPopulation(a);
 		
@@ -215,7 +224,6 @@ public class GA {
 		double sumFitness = 0;
 		double[] tempf = new double[pop.getPopulation().size()];
 		float[] accumulatePro = new float[pop.getPopulation().size()];
-
 		for (k = 0; k < pop.getPopulation().size(); k++) {
 			tempf[k] = fitness[k];
 			sumFitness += tempf[k];
@@ -228,6 +236,9 @@ public class GA {
 			r = Math.random();
 			for (i = 0; i < pop.getPopulation().size(); i++) {
 				if (r <= accumulatePro[i]) {
+					break;
+				}
+				else if(i==pop.getPopulation().size()-1) {
 					break;
 				}
 			}
