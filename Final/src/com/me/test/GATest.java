@@ -42,7 +42,7 @@ class GATest {
 	    	    }
 	    	    in.setBinaryCity(binaryCity);
 	    	    TSP.transRoute(in);
-	    	    int caldis=cood.calculateDistance(in,distance);
+	    	    int caldis=in.calculateDistance(in,distance);
 	    	    int dis = distance[0][1]+distance[1][2]+distance[0][2];
 	    	    
 	        Assert.assertEquals(caldis,dis);
@@ -68,16 +68,38 @@ class GATest {
 	    	  GA ga =new GA();
 	    	  
 	    	  TSP.transRoute(in);
-	    	 // cood.calculateDistance(in,distance);
+	    	  in.calculateDistance(in, distance);
 	    	  
+	    	  Individual inn= new Individual();
+	    	  inn.setBinaryCity(in.getBinaryCity());
+	    	  inn.setDecimalCity(in.getDecimalCity());
+	    	  inn.setDistance(in.getDistance());
 	    	  
-	    	  Individual inn=ga.mutation(in);
-	    	  TSP.transRoute(inn);
-	    	 // cood.calculateDistance(inn,distance);
-	    	  Assert.assertFalse(in.getDistance()==inn.getDistance());
-	    	  
-	    	  
+	    	  ga.mutation(in);
+	    	  in.calculateDistance(in, distance);
+	    	  Assert.assertFalse(in.getDistance()==inn.getDistance());	    	  
 	    
 	    }
+	    @Test
+	    public void testCrossOver() throws Exception {
+	    	  Coordinates cood = new Coordinates();
+	    	  int [][]distance = cood.init(f.getPath(), 20);
+	    	  Individual p1 = new Individual();
+	    	  Individual p2 = new Individual();
+	    	  String []a= {"0011","0110","0111","1000","0100","0101","0001","1001","0010","1010"};
+	    	  String []b= {"0110","0111","0101","0001","0011","1000","1001","1010","0100","0010"};
+	    	  p1.setBinaryCity(a);
+	    	  p2.setBinaryCity(b);
+	    	  GA ga =new GA();
+	    	  TSP.transRoute(p1);
+	    	  TSP.transRoute(p2);
+	    	  p1.calculateDistance(p1, distance);
+	    	  p2.calculateDistance(p2, distance);
+	    	  Individual child= new Individual();
+	    	  child = ga.crossover(p1, p2);
+	    	  Assert.assertFalse(p1.getDistance()==child.getDistance());	    	  
+	    	  Assert.assertFalse(p2.getDistance()==child.getDistance());	   
+	    }
+	    
 	    
 }

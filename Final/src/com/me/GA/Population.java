@@ -17,5 +17,4 @@ public class Population {
 		population.add(in);
 	}
 	
-	
 }

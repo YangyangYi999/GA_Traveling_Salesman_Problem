@@ -49,10 +49,12 @@ public class GA {
 			Individual parents1 = rouletteSelect(fitness, population);
 			Individual parents2 = rouletteSelect(fitness, population);
 			Individual child = crossover(parents1,parents2);
+			child.calculateDistance(child,TSP.distance);
 			
 			Float r =random.nextFloat();
 			if(r<pm) {
 			child=mutation(child);
+			child.calculateDistance(child,TSP.distance);
 					}
 			newPopulation.addIndividual(child);
 			
@@ -119,7 +121,7 @@ public class GA {
 	        child.setBinaryCity(binaryCity);
 	        
 	        TSP.transRoute(child);
-	        child.calculateDistance(child,TSP.distance);
+	        
 	        return child;
 	}
 
@@ -137,7 +139,7 @@ public class GA {
 		binaryCity[r2] = e1;        
 		in.setBinaryCity(binaryCity);
 		TSP.transRoute(in);
-		in.calculateDistance(in,TSP.distance);
+//		in.calculateDistance(in,TSP.distance);
 		return in;
 	}
 

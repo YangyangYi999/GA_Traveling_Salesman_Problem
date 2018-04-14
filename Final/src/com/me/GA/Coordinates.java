@@ -46,18 +46,7 @@ public class Coordinates {
 
 	    return distance;
 	    }  
-	  public int calculateDistance(Individual in, int distance[][]) {
-	    	int totalDistance=0;
-	    	int[]decimalCity = in.getDecimalCity();
-	    	for(int d=0;d<decimalCity.length-1;d++) {
-	    		totalDistance+=distance[decimalCity[d]][decimalCity[d+1]];    		
-	    	}
-//	    	System.out.println("total distance: "+totalDistance);
-	    	totalDistance+=distance[decimalCity[decimalCity.length-1]][decimalCity[0]];
-	    	in.setDistance(totalDistance);
-	      return totalDistance;
-	    	
-	    }
+	
 
 	
 }
