@@ -174,7 +174,7 @@ public class GA {
 	}
 	public Individual[] selectBest(Double[] fitness, Population population) {
 		int size = fitness.length;
-		int selectNum = (int) Math.floor(0.1 * size);
+		int selectNum = (int) Math.ceil(0.1 * size);
 		Double[] Dfit = new Double[size];
 		for (int i = 0; i < size; i++)
 			Dfit[i] = fitness[i];
