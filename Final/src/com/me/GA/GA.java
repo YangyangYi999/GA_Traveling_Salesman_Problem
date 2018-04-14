@@ -165,6 +165,7 @@ public class GA {
 				bestIndividual.setDecimalCity(in.getDecimalCity());
 				bestIndividual.setDistance(in.getDistance());
 				bestGeneration = generation;
+
 			}
 		}
 		

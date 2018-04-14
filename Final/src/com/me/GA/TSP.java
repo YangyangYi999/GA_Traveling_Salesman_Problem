@@ -16,8 +16,10 @@ public class TSP {
   
   
   public Population generatePopulation(Population population,int cityNumber,int pathNumber) throws IOException {
+
 	  File f = new File("src/data.txt");
 	  distance=co.init(f.getPath(), 48);
+
 //	  for(int i=0;i<10;i++) {
 //    	  for(int j=0;j<10;j++) {
 //    		  System.out.print(" "+distance[i][j]);
