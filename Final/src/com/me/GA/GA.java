@@ -31,7 +31,7 @@ public class GA {
 	public Population evolution(Population population, Float pm) {
 		currentGeneration++;
 		Double[] fitness = new Double[population.getPopulation().size()];
-		fitness = fitness(population, fitness);
+		fitness = fitness(population);
 		Individual[] a = selectBest(fitness, population);
 		System.out.println("currentGeneration: "+currentGeneration);
 		System.out.println("best Individual:");
@@ -143,8 +143,8 @@ public class GA {
 		return in;
 	}
 
-	public Double[] fitness(Population population, Double[] fitness) {
-
+	public Double[] fitness(Population population) {
+		Double[] fitness = new Double[population.getPopulation().size()];
 		for (int i = 0; i < population.getPopulation().size(); i++) {
 			Individual in = population.getPopulation().get(i);
 			fitness[i] = (double) 1 / in.getDistance();
