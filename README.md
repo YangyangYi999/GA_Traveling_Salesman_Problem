@@ -12,4 +12,5 @@ The first package is com.me.GA, it contains 7 classes related to genetic algorit
 
 The second package is com.me.test, this package contains all the unit test of this program.
 
-
+Run project without graph : TSP.java
+Run project with grap:TSP_Graph.java  Shows the best route graph
