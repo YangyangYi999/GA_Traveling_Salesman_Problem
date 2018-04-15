@@ -2,9 +2,9 @@ package com.me.GA;
 
 import java.io.File;
 import java.io.IOException;
-
+import org.apache.log4j.Logger;
 import java.util.Random;
-import java.util.logging.Logger;
+
 /**
  * @author Yangyang Yi & Lu Bai
  */
@@ -117,9 +117,9 @@ public class TSP {
 		for (int i = 0; i < 1000; i++) {
 			population = ga.evolution(population, 0.015f);
 		}
-		 log.info("Best Generation !!!!!!!!!");
+	
 		int g = ga.getBestGeneration();
-		System.out.println("Best Generation: " + g);
+		log.info("Best Generation: " + g);
 
 		int[] bestRoute = ga.getBestIndividual().getDecimalCity();
 		String[] binaryRoute = ga.getBestIndividual().getBinaryCity();
@@ -132,7 +132,7 @@ public class TSP {
 			System.out.print(bestRoute[i] + ", ");
 		}
 		System.out.println();
-		System.out.println("Best Distance :" + ga.getBestIndividual().getDistance());
+		log.info("Best Distance :" + ga.getBestIndividual().getDistance());
 
 	
 	}

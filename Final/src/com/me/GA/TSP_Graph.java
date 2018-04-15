@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.io.*;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 /**
  * @author Yangyang Yi & Lu Bai
  */
@@ -26,9 +26,10 @@ public class TSP_Graph extends JPanel {
 			for (int i = 0; i < 1000; i++) {
 				population = ga.evolution(population, 0.015f);
 			}
-			log.info("Best Generation !!!!!!!!!");
+		
 			int bg = ga.getBestGeneration();
-			System.out.println("Best Generation: " + bg);
+			log.info("Best Generation: " + bg);
+
 			int[] bestRoute = ga.getBestIndividual().getDecimalCity();
 			String[] binaryRoute = ga.getBestIndividual().getBinaryCity();
 			System.out.println("Best Individual : ");
@@ -40,7 +41,7 @@ public class TSP_Graph extends JPanel {
 				System.out.print(bestRoute[i] + ", ");
 			}
 			System.out.println();
-			System.out.println("Best Distance :" + ga.getBestIndividual().getDistance());
+			log.info("Best Distance :" + ga.getBestIndividual().getDistance());
 
 		    g.drawString("BestGeneration:"+bg, 50, 510);  
 			g.drawString("BestDestance:"+ga.getBestIndividual().getDistance(), 50, 540);

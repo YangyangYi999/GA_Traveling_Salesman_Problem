@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 /**
  * @author Yangyang Yi & Lu Bai
@@ -23,9 +23,9 @@ public class GA {
 		//Calculate the fitness
 		fitness = fitness(population);
 		Individual[] a = selectBest(fitness, population);
-	    log.info("CurrentPopulation Result");
-		System.out.println("CurrentGeneration: "+currentGeneration);
-		System.out.println("Best Individual:");
+	  
+		log.info("CurrentGeneration: "+currentGeneration);
+		log.info("Best Individual:");
 		for(String i:a[0].getBinaryCity()) {
 			System.out.print(i+",");
 		}
@@ -34,7 +34,7 @@ public class GA {
 			System.out.print(i+",");
 		}
 		System.out.println();
-		System.out.println("CurrentDistance:"+a[0].getDistance());	
+		log.info("CurrentDistance:"+a[0].getDistance());	
 		System.out.println("====================================================");
 		bestIndividual(a[0],currentGeneration);
 		Population newPopulation = newPopulation(a);
