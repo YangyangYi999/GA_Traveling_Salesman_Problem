@@ -3,16 +3,16 @@ package com.me.test;
 
 import java.io.File;
 
-import org.junit.Assert;
-import org.junit.jupiter.api.Test;
 
 import com.me.GA.Coordinates;
 import com.me.GA.GA;
 import com.me.GA.Individual;
 import com.me.GA.Population;
 import com.me.GA.TSP;
+import org.junit.Assert;
+import org.junit.Test;
 
-class GATest {
+public class GATest {
 	File f = new File("src/data.txt");
 
 	@Test
