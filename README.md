@@ -1,12 +1,7 @@
-# Final Project -- Traveling Salesman Problem.
+# Traveling Salesman Problem.
 
-This is a final project for Program Structure & Algorithms. 
+This is a  project Using Genetic Algorithm to solve TSP.
 
-We are Using Genetic Algorithm to solve TSP.
-
-Team number: 512
-
-Team member: Lu Bai&Yangyang Yi
 
 Language: JAVA
 
